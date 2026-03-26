@@ -194,10 +194,10 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 // @desc    Google auth callback
 // @access  Public
 router.get('/google/callback', 
-  passport.authenticate('google', { failureRedirect: 'http://localhost:3000/login', session: false }),
+  passport.authenticate('google', { failureRedirect: 'http://localhost:5173/login', session: false }),
   (req, res) => {
     const token = generateToken(req.user);
-    res.redirect(`http://localhost:3000/auth-success?token=${token}`);
+    res.redirect(`http://localhost:5173/auth-success?token=${token}`);
   }
 );
 
@@ -210,10 +210,10 @@ router.get('/github', passport.authenticate('github', { scope: ['user:email'] })
 // @desc    GitHub auth callback
 // @access  Public
 router.get('/github/callback', 
-  passport.authenticate('github', { failureRedirect: 'http://localhost:3000/login', session: false }),
+  passport.authenticate('github', { failureRedirect: 'http://localhost:5173/login', session: false }),
   (req, res) => {
     const token = generateToken(req.user);
-    res.redirect(`http://localhost:3000/auth-success?token=${token}`);
+    res.redirect(`http://localhost:5173/auth-success?token=${token}`);
   }
 );
 
