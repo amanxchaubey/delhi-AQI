@@ -47,7 +47,7 @@ const sendEmail = async (to, subject, html) => {
 
 // Send verification email
 const sendVerificationEmail = async (email, token) => {
-  const verificationUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/verify-email?token=${token}`;
+  const verificationUrl = `${process.env.FRONTEND_URL || 'https://vercel.com/amankumarch829-5953s-projects/delhi-aqi'}/verify-email?token=${token}`;
   
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -70,7 +70,7 @@ const sendVerificationEmail = async (email, token) => {
 
 // Send password reset email
 const sendPasswordResetEmail = async (email, token) => {
-  const resetUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/reset-password?token=${token}`;
+  const resetUrl = `${process.env.FRONTEND_URL || 'https://vercel.com/amankumarch829-5953s-projects/delhi-aqi'}/reset-password?token=${token}`;
   
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
