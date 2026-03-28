@@ -194,10 +194,10 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 // @desc    Google auth callback
 // @access  Public
 router.get('/google/callback', 
-  passport.authenticate('google', { failureRedirect: 'https://vercel.com/amankumarch829-5953s-projects/delhi-aqi/login', session: false }),
+  passport.authenticate('google', { failureRedirect: 'https://delhi-aqi-olive.vercel.app/login', session: false }),
   (req, res) => {
     const token = generateToken(req.user);
-    res.redirect(`https://vercel.com/amankumarch829-5953s-projects/delhi-aqi/auth-success?token=${token}`);
+    res.redirect(`https://delhi-aqi-olive.vercel.app/auth-success?token=${token}`);
   }
 );
 
@@ -210,10 +210,10 @@ router.get('/github', passport.authenticate('github', { scope: ['user:email'] })
 // @desc    GitHub auth callback
 // @access  Public
 router.get('/github/callback', 
-  passport.authenticate('github', { failureRedirect: 'https://vercel.com/amankumarch829-5953s-projects/delhi-aqi/login', session: false }),
+  passport.authenticate('github', { failureRedirect: 'https://delhi-aqi-olive.vercel.app/login', session: false }),
   (req, res) => {
     const token = generateToken(req.user);
-    res.redirect(`https://vercel.com/amankumarch829-5953s-projects/delhi-aqi/auth-success?token=${token}`);
+    res.redirect(`https://delhi-aqi-olive.vercel.app/auth-success?token=${token}`);
   }
 );
 
