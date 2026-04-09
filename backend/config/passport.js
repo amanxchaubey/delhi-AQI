@@ -9,9 +9,7 @@ module.exports = function(passport) {
     passport.use(new GoogleStrategy({
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: process.env.NODE_ENV === 'production' 
-        ? "https://delhi-aqi-1.onrender.com/api/auth/google/callback" 
-        : "/api/auth/google/callback",
+      callbackURL: "/api/auth/google/callback",
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -52,9 +50,7 @@ module.exports = function(passport) {
     passport.use(new GitHubStrategy({
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: process.env.NODE_ENV === 'production' 
-        ? "https://delhi-aqi-1.onrender.com/api/auth/github/callback" 
-        : "/api/auth/github/callback",
+      callbackURL: "/api/auth/github/callback",
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
