@@ -3,6 +3,20 @@ import { motion } from 'framer-motion';
 import API_BASE_URL from '../../api';
 
 const SocialLogin = () => {
+  const handleGoogleLogin = () => {
+    const redirectUri = "https://delhi-aqi-n2y5.onrender.com/api/auth/google/callback";
+
+    const googleAuthURL =
+      "https://accounts.google.com/o/oauth2/v2/auth" +
+      "?client_id=660977420887-2kfpjnju9900rhvni9ogemh39ur82eq2.apps.googleusercontent.com" +
+      "&redirect_uri=" + encodeURIComponent(redirectUri) +
+      "&response_type=code" +
+      "&scope=openid%20email%20profile" +
+      "&access_type=offline";
+
+    window.location.href = googleAuthURL;
+  };
+
   return (
     <div className="mt-8">
       <div className="relative mb-6">
@@ -15,10 +29,10 @@ const SocialLogin = () => {
       </div>
 
       <div className="flex justify-center">
-        <motion.a
+        <motion.button
           whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.05)' }}
           whileTap={{ scale: 0.98 }}
-          href={`${API_BASE_URL}/auth/google`}
+          onClick={handleGoogleLogin}
           className="flex items-center justify-center gap-3 px-8 py-3 rounded-2xl bg-white/[0.03] border border-white/5 transition-all group cursor-pointer min-w-[200px]"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -28,7 +42,7 @@ const SocialLogin = () => {
             <path fill="#FBBC05" d="M5.736 15.018A7.067 7.067 0 0 1 5.318 12c0-1.055.164-2.073.418-3.036L1.715 5.854A11.97 11.97 0 0 0 0 12c0 2.255.618 4.364 1.709 6.182l4.027-3.164z"/>
           </svg>
           <span className="text-xs font-black text-gray-300 group-hover:text-white uppercase tracking-widest">Continue with Google</span>
-        </motion.a>
+        </motion.button>
       </div>
     </div>
   );
