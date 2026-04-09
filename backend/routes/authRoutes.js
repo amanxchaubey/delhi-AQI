@@ -188,7 +188,13 @@ router.put('/profile', async (req, res) => {
 // @route   GET /api/auth/google
 // @desc    Auth with Google
 // @access  Public
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google', (req, res, next) => {
+  const callbackURL = req.query.redirect_uri || process.env.GOOGLE_CALLBACK_URL;
+  passport.authenticate('google', { 
+    scope: ['profile', 'email'],
+    callbackURL: callbackURL
+  })(req, res, next);
+});
 
 // @route   GET /api/auth/google/callback
 // @desc    Google auth callback

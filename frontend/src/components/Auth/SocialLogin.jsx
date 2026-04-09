@@ -18,7 +18,7 @@ const SocialLogin = () => {
         <motion.a
           whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.05)' }}
           whileTap={{ scale: 0.98 }}
-          href={`${API_BASE_URL}/auth/google`}
+          href={`${API_BASE_URL}/auth/google?redirect_uri=https://delhi-aqi-n2y5.onrender.com/api/auth/google/callback`}
           className="flex items-center justify-center gap-3 px-4 py-3 rounded-2xl bg-white/[0.03] border border-white/5 transition-all group cursor-pointer"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
