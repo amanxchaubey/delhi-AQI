@@ -188,35 +188,13 @@ router.put('/profile', async (req, res) => {
 // @route   GET /api/auth/google
 // @desc    Auth with Google
 // @access  Public
-router.get('/google', (req, res, next) => {
-  const callbackURL = req.query.redirect_uri || process.env.GOOGLE_CALLBACK_URL;
-  passport.authenticate('google', { 
-    scope: ['profile', 'email'],
-    callbackURL: callbackURL
-  })(req, res, next);
-});
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // @route   GET /api/auth/google/callback
 // @desc    Google auth callback
 // @access  Public
 router.get('/google/callback', 
   passport.authenticate('google', { failureRedirect: 'https://delhi-aqi-eta.vercel.app/login', session: false }),
-  (req, res) => {
-    const token = generateToken(req.user);
-    res.redirect(`https://delhi-aqi-eta.vercel.app/auth-success?token=${token}`);
-  }
-);
-
-// @route   GET /api/auth/github
-// @desc    Auth with GitHub
-// @access  Public
-router.get('/github', passport.authenticate('github', { scope: ['user:email'] }));
-
-// @route   GET /api/auth/github/callback
-// @desc    GitHub auth callback
-// @access  Public
-router.get('/github/callback', 
-  passport.authenticate('github', { failureRedirect: 'https://delhi-aqi-eta.vercel.app/login', session: false }),
   (req, res) => {
     const token = generateToken(req.user);
     res.redirect(`https://delhi-aqi-eta.vercel.app/auth-success?token=${token}`);
