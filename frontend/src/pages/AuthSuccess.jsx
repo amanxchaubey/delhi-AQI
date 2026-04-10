@@ -10,23 +10,33 @@ const AuthSuccess = () => {
 
   useEffect(() => {
     try {
-      const params = new URLSearchParams(location.search);
+      // Try useLocation first, then window.location.search as fallback
+      const search = location.search || window.location.search;
+      const params = new URLSearchParams(search);
       const token = params.get('token');
 
       if (token) {
+        console.log('Token found, authenticating...');
         // Store token and set user
         setUserFromToken(token);
         
         // Immediate redirect to dashboard
         navigate('/dashboard', { replace: true });
+        
+        // Safety fallback: if react-router doesn't navigate, force it
+        setTimeout(() => {
+          if (window.location.pathname === '/auth-success') {
+            window.location.href = '/dashboard';
+          }
+        }, 2000);
       } else {
+        console.warn('No token found in URL, redirecting to login');
         navigate('/login', { replace: true });
       }
     } catch (error) {
       console.error('Authentication success handling error:', error);
       navigate('/login', { replace: true });
     }
-    // Only run on mount
   }, []);
 
   return (

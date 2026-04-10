@@ -10,14 +10,14 @@ const auth = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.userId).select('-password');
+    const user = await User.findById(decoded.id).select('-password');
     
     if (!user) {
       return res.status(401).json({ error: 'User not found' });
     }
 
     req.user = user;
-    req.userId = decoded.userId;
+    req.userId = decoded.id;
     next();
   } catch (error) {
     res.status(401).json({ error: 'Invalid authentication token' });
