@@ -9,21 +9,25 @@ const AuthSuccess = () => {
   const { setUserFromToken } = useAuth();
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const token = params.get('token');
+    try {
+      const params = new URLSearchParams(location.search);
+      const token = params.get('token');
 
-    if (token) {
-      // Store token and set user in one step
-      setUserFromToken(token);
-      
-      // Redirect to dashboard
-      setTimeout(() => {
+      if (token) {
+        // Store token and set user
+        setUserFromToken(token);
+        
+        // Immediate redirect to dashboard
         navigate('/dashboard', { replace: true });
-      }, 1000);
-    } else {
+      } else {
+        navigate('/login', { replace: true });
+      }
+    } catch (error) {
+      console.error('Authentication success handling error:', error);
       navigate('/login', { replace: true });
     }
-  }, [location, navigate, setUserFromToken]);
+    // Only run on mount
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#050a18] flex flex-col items-center justify-center space-y-6">
